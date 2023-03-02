@@ -64,3 +64,6 @@ UpgradeLog*.XML
 
 # NuGet
 packages/
+/src/CAPNet.Cmd.backup
+/src/CAPNet.Cmd/upgrade-assistant.clef
+/src/CAPNet.Cmd/UpgradeReport.sarif
