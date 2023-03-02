@@ -12,7 +12,7 @@ namespace CAPNet
             var info = InfoCreator.CreateValidInfo();
             var severityValidator = new SeverityRequiredValidator(info);
             Assert.True(severityValidator.IsValid);
-            Assert.Equal(0, severityValidator.Errors.Count());
+            Assert.Empty(severityValidator.Errors);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace CAPNet
         {
             var severityValidator = new SeverityRequiredValidator(new Info());
             Assert.False(severityValidator.IsValid);
-            Assert.Equal(1, severityValidator.Errors.Count());
+            Assert.Single(severityValidator.Errors);
         }
     }
 }

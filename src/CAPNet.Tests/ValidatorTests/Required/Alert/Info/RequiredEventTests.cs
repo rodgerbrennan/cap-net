@@ -12,7 +12,7 @@ namespace CAPNet
             var info = InfoCreator.CreateValidInfo();
             var eventValidator = new EventRequiredValidator(info);
             Assert.True(eventValidator.IsValid);
-            Assert.Equal(0, eventValidator.Errors.Count());
+            Assert.Empty(eventValidator.Errors);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace CAPNet
         {
             var eventValidator = new EventRequiredValidator(new Info());
             Assert.False(eventValidator.IsValid);
-            Assert.Equal(1, eventValidator.Errors.Count());
+            Assert.Single(eventValidator.Errors);
         }
     }
 }

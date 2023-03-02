@@ -1,8 +1,11 @@
-﻿namespace CAPNet.Models
+﻿using System.Xml.Serialization;
+
+namespace CAPNet.Models
 {
     /// <summary>
     /// A system-specific code identifying the event type of the alert message 
     /// </summary>
+    [XmlRoot("eventCode")]
     public class EventCode : NamedValue
     {
         /// <summary>

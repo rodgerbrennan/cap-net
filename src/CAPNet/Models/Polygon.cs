@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
     /// <summary>
     /// The paired values of points defining a polygon that delineates the affected area of the alert message 
     /// </summary>
+    [XmlRoot("polygon")]
     public class Polygon
     {
         private readonly List<Coordinate> coordinates;
@@ -14,6 +16,7 @@ namespace CAPNet.Models
         /// <summary>
         /// list of [WGS 84] coordinate pairs
         /// </summary>
+        [XmlElement("coordinates")]
         public IEnumerable<Coordinate> Coordinates => coordinates;
 
 

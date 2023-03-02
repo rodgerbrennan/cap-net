@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
     /// <summary>
     /// The container for all component parts of the alert message.
     /// </summary>
+    [XmlRoot("alert")]
     public class Alert
     {
         /// <summary>
@@ -37,6 +39,7 @@ namespace CAPNet.Models
         ///     </item>
         ///     </list>
         /// </remarks>
+        [XmlElement("identifier")]
         public string Identifier { get; set; }
 
         /// <summary>
@@ -56,6 +59,7 @@ namespace CAPNet.Models
         ///     </item>
         ///     </list>
         /// </remarks>
+        [XmlElement("sender")]
         public string Sender { get; set; }
 
         /// <summary>
@@ -75,6 +79,7 @@ namespace CAPNet.Models
         ///     </item>
         ///     </list>
         /// </remarks>
+        [XmlElement("sent")]
         public DateTimeOffset? Sent { get; set; }
 
         /// <summary>
@@ -94,6 +99,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("status")]
         public Status Status { get; set; }
 
         /// <summary>
@@ -113,6 +119,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("messageType")]
         public MessageType MessageType { get; set; }
 
         /// <summary>
@@ -137,6 +144,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("source")]
         public string Source { get; set; }
 
         /// <summary>
@@ -154,11 +162,13 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("scope")]
         public Scope Scope { get; set; }
 
         /// <summary>
         /// The text describing the rule for limiting distribution of the restricted alert message 
         /// </summary>
+        [XmlElement("restriction")]
         public string Restriction { get; set; }
 
         /// <summary>
@@ -183,6 +193,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("addresses")]
         public ICollection<string> Addresses
         {
             get
@@ -208,6 +219,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("codes")]
         public ICollection<string> Codes { get; }
 
         /// <summary>
@@ -220,6 +232,7 @@ namespace CAPNet.Models
         ///     </description>
         ///   </item>
         /// </remarks>
+        [XmlElement("note")]
         public string Note { get; set; }
 
         /// <summary>
@@ -239,6 +252,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("references")]
         public ICollection<string> References
         {
             get
@@ -264,6 +278,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("incidents")]
         public ICollection<string> Incidents
         {
             get
@@ -296,6 +311,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("info")]
         public ICollection<Info> Info
         {
             get { return info; }

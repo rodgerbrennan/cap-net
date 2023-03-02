@@ -14,7 +14,7 @@ namespace CAPNet
 
             var areaDescriptionRequiredValidator = new AreaDescriptionRequiredValidator(area);
             Assert.True(areaDescriptionRequiredValidator.IsValid);
-            Assert.Equal(0, areaDescriptionRequiredValidator.Errors.Count());
+            Assert.Empty(areaDescriptionRequiredValidator.Errors);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace CAPNet
 
             var areaDescriptionRequiredValidator = new AreaDescriptionRequiredValidator(area);
             Assert.False(areaDescriptionRequiredValidator.IsValid);
-            Assert.Equal(1, areaDescriptionRequiredValidator.Errors.Count());
+            Assert.Single(areaDescriptionRequiredValidator.Errors);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace CAPNet
 
             var areaDescriptionRequiredValidator = new AreaDescriptionRequiredValidator(area);
             Assert.False(areaDescriptionRequiredValidator.IsValid);
-            Assert.Equal(1, areaDescriptionRequiredValidator.Errors.Count());
+            Assert.Single(areaDescriptionRequiredValidator.Errors);
         }
     }
 }

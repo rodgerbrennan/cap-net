@@ -1,8 +1,10 @@
+using System.Xml.Serialization;
 namespace CAPNet.Models
 {
     /// <summary>
     /// Base class for values with names (e.g. EventCode, GeoCode)
     /// </summary>
+    [XmlRoot("namedValue")]
     public class NamedValue
     {
         /// <summary>
@@ -19,11 +21,13 @@ namespace CAPNet.Models
         /// <summary>
         /// 
         /// </summary>
+        [XmlElement("value")]
         public string Value { get; }
 
         /// <summary>
         /// 
         /// </summary>
+        [XmlElement("valueName")]
         public string ValueName { get; }
     }
 }

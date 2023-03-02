@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
     /// <summary>
     ///  [WGS 84] coordinate pair 
     /// </summary>
+    [XmlRoot("coordinate")]
     public sealed class Coordinate
     {
         /// <summary>
@@ -38,11 +40,13 @@ namespace CAPNet.Models
         /// <summary>
         /// The latitude part of this coordinate, in WGS 84.
         /// </summary>
+        [XmlElement("latitude")]
         public decimal Latitude { get; }
 
         /// <summary>
         /// The longitude part of this coordinate, in WGS 84.
         /// </summary>
+        [XmlElement("longitude")]
         public decimal Longitude { get; }
 
         /// <summary>

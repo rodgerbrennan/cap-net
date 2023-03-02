@@ -1,8 +1,11 @@
-﻿namespace CAPNet.Models
+﻿using System.Xml.Serialization;
+
+namespace CAPNet.Models
 {
     /// <summary>
     /// Codification of a geographical area (e.g. zip code)
     /// </summary>
+    [XmlRoot("geoCode")]
     public class GeoCode : NamedValue
     {
         /// <summary>

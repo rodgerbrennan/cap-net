@@ -13,7 +13,7 @@ namespace CAPNet
             resource.MimeType = "";
             var mimeTypeValidator = new MimeTypeRequiredValidator(resource);
             Assert.False(mimeTypeValidator.IsValid);
-            Assert.Equal(1, mimeTypeValidator.Errors.Count());
+            Assert.Single(mimeTypeValidator.Errors);
         }
 
         [Fact]

@@ -31,7 +31,7 @@ namespace CAPNet
 
             var resourceValidator = new ResourceValidator(info);
             Assert.True(resourceValidator.IsValid);
-            Assert.Equal(0, resourceValidator.Errors.Count());
+            Assert.Empty(resourceValidator.Errors);
         }
 
         [Fact]

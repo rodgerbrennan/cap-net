@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
@@ -22,6 +23,7 @@ namespace CAPNet.Models
     ///     </item>
     ///   </list>
     /// </remarks>
+    [XmlRoot("info")]
     public class Info
     {
         private string language;
@@ -78,6 +80,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("language")]
         public string Language
         {
             get { return String.IsNullOrWhiteSpace(language) ? DefaultLanguage : language; }
@@ -110,6 +113,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("responseTypes")]
         public ICollection<ResponseType> ResponseTypes
         {
             get
@@ -147,6 +151,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("categories")]
         public ICollection<Category> Categories
         {
             get { return categories; }
@@ -155,6 +160,7 @@ namespace CAPNet.Models
         /// <summary>
         /// The text denoting the type of the subject event of the alert message
         /// </summary>
+        [XmlElement("event")]
         public string Event { get; set; }
 
         /// <summary>
@@ -179,6 +185,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("urgency")]
         public Urgency Urgency { get; set; }
 
         /// <summary>
@@ -203,6 +210,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("severity")]
         public Severity Severity { get; set; }
 
         /// <summary>
@@ -232,11 +240,13 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("certainty")]
         public Certainty Certainty { get; set; }
 
         /// <summary>
         /// The text describing the intended audience of the alert message 
         /// </summary>
+        [XmlElement("audience")]
         public string Audience { get; set; }
 
         /// <summary>
@@ -263,6 +273,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("effective")]
         public DateTimeOffset? Effective { get; set; }
 
         /// <summary>
@@ -284,6 +295,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("onset")]
         public DateTimeOffset? Onset { get; set; }
 
         /// <summary>
@@ -310,6 +322,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("expires")]
         public DateTimeOffset? Expires { get; set; }
 
         /// <summary>
@@ -324,6 +337,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("senderName")]
         public string SenderName { get; set; }
 
         /// <summary>
@@ -340,6 +354,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("headline")]
         public string Headline { get; set; }
 
         /// <summary>
@@ -354,6 +369,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("description")]
         public string Description { get; set; }
 
         /// <summary>
@@ -369,6 +385,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("instruction")]
         public string Instruction { get; set; }
 
         /// <summary>
@@ -383,11 +400,13 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("web")]
         public Uri Web { get; set; }
 
         /// <summary>
         /// The text describing the contact for follow-up and confirmation of the alert message 
         /// </summary>
+        [XmlElement("contact")]
         public string Contact { get; set; }
 
         /// <summary>
@@ -419,11 +438,12 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("parameters")]
         public ICollection<Parameter> Parameters
         {
             get { return parameters; }
         }
-        
+
         /// <summary>
         /// A system-specific codes identifying the event type of the alert message 
         /// </summary>
@@ -452,6 +472,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("eventCodes")]
         public ICollection<EventCode> EventCodes
         {
             get { return eventCodes; }
@@ -474,6 +495,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("resources")]
         public ICollection<Resource> Resources
         {
             get { return resources; }
@@ -498,6 +520,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("areas")]
         public ICollection<Area> Areas
         {
             get { return areas; }

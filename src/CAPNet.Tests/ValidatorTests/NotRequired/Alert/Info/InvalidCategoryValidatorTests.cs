@@ -12,7 +12,7 @@ namespace CAPNet
             
             var categoryValidator = new InvalidCategoryValidator(info);
             Assert.True(categoryValidator.IsValid);
-            Assert.Equal(0, categoryValidator.Errors.Count());
+            Assert.Empty(categoryValidator.Errors);
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace CAPNet
 
             var categoryValidator = new InvalidCategoryValidator(info);
             Assert.False(categoryValidator.IsValid);
-            Assert.Equal(1, categoryValidator.Errors.Count());
+            Assert.Single(categoryValidator.Errors);
         }
     }
 }

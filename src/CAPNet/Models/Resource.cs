@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
@@ -19,6 +20,7 @@ namespace CAPNet.Models
     ///     </item>
     ///   </list>
     /// </remarks>
+    [XmlRoot("resource")]
     public class Resource
     {
         /// <summary>
@@ -33,6 +35,7 @@ namespace CAPNet.Models
         ///    </item>
         ///  </list>
         /// </remarks>
+        [XmlElement("description")]
         public string Description { get; set; }
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("mimeType")]
         public string MimeType { get; set; }
 
         /// <summary>
@@ -67,6 +71,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("size")]
         public int? Size { get; set; }
 
         /// <summary>
@@ -82,6 +87,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("uri")]
         public Uri Uri { get; set; }
 
         /// <summary>
@@ -120,6 +126,7 @@ namespace CAPNet.Models
         ///   </list>
         /// </remarks>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
+        [XmlElement("dereferencedUri")]
         public byte[] DereferencedUri { get; set; }
 
         /// <summary>
@@ -134,6 +141,7 @@ namespace CAPNet.Models
         ///     </item>
         ///   </list>
         /// </remarks>
+        [XmlElement("digest")]
         public string Digest { get; set; }
     }
 }

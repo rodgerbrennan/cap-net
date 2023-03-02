@@ -12,7 +12,7 @@ namespace CAPNet
             var info = InfoCreator.CreateValidInfo();
             var urgencyValidator = new UrgencyRequiredValidator(info);
             Assert.True(urgencyValidator.IsValid);
-            Assert.Equal(0, urgencyValidator.Errors.Count());
+            Assert.Empty(urgencyValidator.Errors);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace CAPNet
         {
             var urgencyValidator = new UrgencyRequiredValidator(new Info());
             Assert.False(urgencyValidator.IsValid);
-            Assert.Equal(1, urgencyValidator.Errors.Count());
+            Assert.Single(urgencyValidator.Errors);
         }
     }
 }

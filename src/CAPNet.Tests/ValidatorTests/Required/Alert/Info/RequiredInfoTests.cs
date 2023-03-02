@@ -18,7 +18,7 @@ namespace CAPNet
             var singleErrorsValidation = singleAlertValidator.Errors;
             // the info should be valid
             Assert.True(singleAlertValidator.IsValid);
-            Assert.Equal(0, singleErrorsValidation.Count());
+            Assert.Empty(singleErrorsValidation);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace CAPNet
             var doubleAlertValidator = new InfoValidator(alert);
             // the info should be valid
             Assert.True(doubleAlertValidator.IsValid);
-            Assert.Equal(0, doubleAlertValidator.Errors.Count());
+            Assert.Empty(doubleAlertValidator.Errors);
         }
 
         [Fact]

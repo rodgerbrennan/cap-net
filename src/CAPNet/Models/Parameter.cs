@@ -1,8 +1,10 @@
-﻿namespace CAPNet.Models
+﻿using System.Xml.Serialization;
+namespace CAPNet.Models
 {
     /// <summary>
     /// A system-specific additional parameter associated with the alert message 
     /// </summary>
+    [XmlRoot("parameter")]
     public class Parameter : NamedValue
     {
         /// <summary>

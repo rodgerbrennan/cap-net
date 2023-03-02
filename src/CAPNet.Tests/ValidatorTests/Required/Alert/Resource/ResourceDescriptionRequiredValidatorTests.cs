@@ -14,7 +14,7 @@ namespace CAPNet
 
             var descriptionValidator = new ResourceDescriptionRequiredValidator(resource);
             Assert.False(descriptionValidator.IsValid);
-            Assert.Equal(1, descriptionValidator.Errors.Count());
+            Assert.Single(descriptionValidator.Errors);
         }
 
         [Fact]

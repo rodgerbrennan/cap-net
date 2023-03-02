@@ -14,7 +14,7 @@ namespace CAPNet
 
             var senderValidator = new SenderRequiredValidator(alert);
             Assert.True(senderValidator.IsValid);
-            Assert.Equal(0, senderValidator.Errors.Count());
+            Assert.Empty(senderValidator.Errors);
         }
 
         [Fact]

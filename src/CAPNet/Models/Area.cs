@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 
 namespace CAPNet.Models
@@ -24,6 +25,7 @@ namespace CAPNet.Models
     ///     </item>
     ///   </list>
     /// </remarks>
+    [XmlRoot("area")]
     public class Area
     {
         private readonly ICollection<Circle> circles;
@@ -46,6 +48,7 @@ namespace CAPNet.Models
         /// The text describing the affected area of the alert message (REQUIRED)
         /// </summary>
         /// <remarks>An extended human readable description of the hazard or event that occasioned this message.</remarks>
+        [XmlElement("description")]
         public string Description { get; set; }
 
         /// <summary>
@@ -64,6 +67,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
+        [XmlElement("polygons")]
         public ICollection<Polygon> Polygons
         {
             get { return polygons; }
@@ -72,6 +76,7 @@ namespace CAPNet.Models
         /// <summary>
         /// The paired values of a point and radius delineating the affected area of the alert message
         /// </summary>
+        [XmlElement("circles")]
         public ICollection<Circle> Circles
         {
             get { return circles; }
@@ -106,6 +111,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
+        [XmlElement("geocodes")]
         public ICollection<GeoCode> GeoCodes
         {
             get { return geoCodes; }
@@ -124,6 +130,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
+        [XmlElement("altitude")]
         public int? Altitude { get; set; }
 
         /// <summary>
@@ -139,6 +146,7 @@ namespace CAPNet.Models
         ///     </description></item>
         ///   </list>
         /// </remarks>
+        [XmlElement("ceiling")]
         public int? Ceiling { get; set; }
     }
 }

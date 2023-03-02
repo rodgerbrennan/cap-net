@@ -66,7 +66,7 @@ namespace CAPNet
             var incidentsNodeValue = incidentsNode?.Value;
             if (!string.IsNullOrEmpty(incidentsNodeValue))
             {
-                var incidents = incidentsNodeValue.GetElements();
+                var incidents = SpaceDelimitedElementsParser.GetElements(incidentsNodeValue);
                 alert.Incidents.AddRange(incidents);
             }
 
@@ -74,7 +74,7 @@ namespace CAPNet
             var referencesNodeValue = referencesNode?.Value;
             if (!string.IsNullOrEmpty(referencesNodeValue))
             {
-                var references = referencesNodeValue.GetElements();
+                var references = SpaceDelimitedElementsParser.GetElements(referencesNodeValue);
                 alert.References.AddRange(references);
             }
 
@@ -95,7 +95,7 @@ namespace CAPNet
             var addressNodeValue = addressesNode?.Value;
             if (!string.IsNullOrEmpty(addressNodeValue))
             {
-                var addresses = addressNodeValue.GetElements();
+                var addresses = SpaceDelimitedElementsParser.GetElements(addressNodeValue);
                 alert.Addresses.AddRange(addresses);
             }
 

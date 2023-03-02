@@ -63,12 +63,12 @@ namespace CAPNet.Tests
         {
             //<addresses>address1 address2 address3</addresses>
             var usedAddress = "address1 address2 address3";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(3, elements.Count());
-            Assert.Equal(elements.ElementAt(0), "address1");
-            Assert.Equal(elements.ElementAt(1), "address2");
-            Assert.Equal(elements.ElementAt(2), "address3");
+            Assert.Equal("address1", elements.ElementAt(0));
+            Assert.Equal("address2", elements.ElementAt(1));
+            Assert.Equal("address3", elements.ElementAt(2));
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace CAPNet.Tests
         {
             //<addresses>address1 "address2" address3 "address4"</addresses>
             var usedAddress = "address1 \"address2\" address3 \"address4\"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(4, elements.Count());
             Assert.Equal("address1", elements.ElementAt(0));
@@ -90,7 +90,7 @@ namespace CAPNet.Tests
         {
             //<addresses>address1 "address 2 " "address 3" "address 4"</addresses>
             var usedAddress = "address1 \"address 2 \" \"address 3\" \"address 4\"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(4, elements.Count());
             Assert.Equal("address1", elements.ElementAt(0));
@@ -104,7 +104,7 @@ namespace CAPNet.Tests
         {
             //<addresses>"address1 " "address 3 " "address 4 "</addresses>
             var usedAddress = "\"address1 \" \"address 3 \" \"address 4 \"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(3, elements.Count());
             Assert.Equal("address1 ", elements.ElementAt(0));
@@ -118,7 +118,7 @@ namespace CAPNet.Tests
         {
             //<addresses>  "address1 " "address 3 " "address 4 "    </addresses>
             var usedAddress = "   \"address1 \" \"address 3 \" \"address 4 \"   ";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(3, elements.Count());
             Assert.Equal("address1 ", elements.ElementAt(0));
@@ -131,7 +131,7 @@ namespace CAPNet.Tests
         {
             //<addresses>"address1 "    "address 3 " "address 4      "</addresses>
             var usedAddress = "   \"address1 \"    \"address 3 \" \"address 4      \"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(3, elements.Count());
             Assert.Equal("address1 ", elements.ElementAt(0));
@@ -144,7 +144,7 @@ namespace CAPNet.Tests
         {
             //<addresses>" " "address 3 " "address 4 "    </addresses>
             var usedAddress = "\" \" \"address 3 \" \"address 4 \"   ";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(3, elements.Count());
             Assert.Equal(" ", elements.ElementAt(0));
@@ -156,25 +156,25 @@ namespace CAPNet.Tests
         public void CanParseSingleAddress()
         {
             var usedAddress = "address";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
             Assert.Equal("address",elements.ElementAt(0));
-            Assert.Equal(1, elements.Count());
+            Assert.Single(elements);
         }
 
         [Fact]
         public void CanParseSingleAddressUntrimmed()
         {
             var usedAddress = "  address  ";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
             Assert.Equal("address", elements.ElementAt(0));
-            Assert.Equal(1, elements.Count());
+            Assert.Single(elements);
         }
 
         [Fact]
         public void CanParseSingleCharactedAddresses()
         {
             var usedAddress = "a b";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
             Assert.Equal("a", elements.ElementAt(0));
             Assert.Equal("b", elements.ElementAt(1));
             Assert.Equal(2, elements.Count());
@@ -184,16 +184,16 @@ namespace CAPNet.Tests
         public void CanParseSingleSpaceContainingAddress()
         {
             var usedAddress = "\" address 1\"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
             Assert.Equal(" address 1", elements.ElementAt(0));
-            Assert.Equal(1, elements.Count());
+            Assert.Single(elements);
         }
 
         [Fact]
         public void CanParseWithEmptyStringInBetweenQuotes()
         {
             var usedAddress = "\" address 1\" address2 \"\" address4";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
             Assert.Equal(" address 1", elements.ElementAt(0));
             Assert.Equal("address2", elements.ElementAt(1));
             Assert.Equal("", elements.ElementAt(2));
@@ -205,7 +205,7 @@ namespace CAPNet.Tests
         public void CanParseWithAddress()
         {
             var usedAddress = "\" \" adress addr \"bs \" \"long\" \"one two three \"";
-            var elements = usedAddress.GetElements();
+            IEnumerable<string> elements = SpaceDelimitedElementsParser.GetElements(usedAddress);
 
             Assert.Equal(6, elements.Count());
             Assert.Equal(" ", elements.ElementAt(0));
@@ -221,7 +221,7 @@ namespace CAPNet.Tests
         {
             var usedXml = Xml.WrongData.Replace("<incidents></incidents>", "<incidents>\"nasty incident \" incident \"another incident\"</incidents>");
             var alert = XmlParser.Parse(usedXml).First();
-            var incidents = alert.Incidents;
+            IEnumerable<string> incidents = alert.Incidents;
             Assert.Equal("nasty incident ", incidents.ElementAt(0));
             Assert.Equal("incident", incidents.ElementAt(1));
             Assert.Equal("another incident", incidents.ElementAt(2));

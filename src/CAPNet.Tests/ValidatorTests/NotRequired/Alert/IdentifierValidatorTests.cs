@@ -25,7 +25,7 @@ namespace CAPNet
             var identifierValidator = new IdentifierValidator(alert);
             Assert.False(identifierValidator.IsValid);
             Assert.Equal(typeof(IdentifierError), identifierValidator.Errors.ElementAt(0).GetType());
-            Assert.Equal(1, identifierValidator.Errors.Count());
+            Assert.Single(identifierValidator.Errors);
         }
     }
 }

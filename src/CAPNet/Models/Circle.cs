@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace CAPNet.Models
 {
     /// <summary>
     /// The paired values of a point and radius delineating the affected area of the alert message
     /// </summary>
+    [XmlRoot("circle")]
     public class Circle
     {
         /// <summary>
@@ -36,11 +38,13 @@ namespace CAPNet.Models
         /// <summary>
         /// radius value in kilometers
         /// </summary>
+        [XmlElement("radius")]
         public decimal Radius { get; }
 
         /// <summary>
         /// [WGS 84] coordinate pair 
         /// </summary>
+        [XmlElement("center")]
         public Coordinate Center { get; }
 
         /// <summary>

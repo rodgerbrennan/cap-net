@@ -12,7 +12,7 @@ namespace CAPNet
             var info = InfoCreator.CreateValidInfo();
             var categoriesValidator = new CategoryRequiredValidator(info);
             Assert.True(categoriesValidator.IsValid);
-            Assert.Equal(0, categoriesValidator.Errors.Count());
+            Assert.Empty(categoriesValidator.Errors);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace CAPNet
         {
             var categoryValidator = new CategoryRequiredValidator(new Info());
             Assert.False(categoryValidator.IsValid);
-            Assert.Equal(1, categoryValidator.Errors.Count());
+            Assert.Single(categoryValidator.Errors);
         }
     }
 }
