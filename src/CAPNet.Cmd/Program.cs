@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Security.Policy;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Syndication;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -13,81 +17,106 @@ namespace CAPNet.Cmd
 {
     class Program
     {
-        static void Main()
+        static async Task Main()
         {
-            ReadNWS();
+            await ReadNWS();
         }
 
-        static void ReadNWS()
+        static async Task ReadNWS()
         {
-            List<Alert> alerts;
+            List<Alert> alerts = new List<Alert>();
 
-            using (var reader = XmlReader.Create("http://alerts.weather.gov/cap/us.php?x=0"))
+            var uri = "http://alerts.weather.gov/cap/us.php?x=0";
+
+            try
             {
-                var feed = SyndicationFeed.Load(reader);
+                HttpClient httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
 
-                alerts = (from item in feed.Items
-                          from alert in GetAlerts(item.Id)
-                          select alert)
-                         .ToList();
-            }
+                var response = await httpClient.GetAsync(uri);
+                var stream = await response.Content.ReadAsStreamAsync();
 
-            if (!alerts.Any())
-                Console.WriteLine("No alerts");
-            else if(alerts.Count == 1)
-                Console.WriteLine("1 alert");
-            else
-                Console.WriteLine("{0} alerts", alerts.Count);
-
-            foreach (var alert in alerts.Where(a => a.Info.Any(i => i.Severity <= Severity.Severe)))
-            {
-                Console.WriteLine("------------------------------");
-                Console.WriteLine("Sender: " + alert.Sender);
-                Console.WriteLine("Note: " + alert.Note);
-
-                foreach (var info in alert.Info)
+                using (var reader = XmlReader.Create(stream))
                 {
-                    Console.WriteLine("  *******");
-                    Console.WriteLine("  " + info.Headline);
-                    Console.WriteLine("  Effective: " + info.Effective);
-                    Console.WriteLine("  Expires: " + info.Expires);
-                    Console.WriteLine("  Severity: " + info.Severity);
+                    var feed = SyndicationFeed.Load(reader);
 
-                    foreach (var area in info.Areas)
+                    var items = feed.Items;
+
+                    foreach (var item in items)
                     {
-                        Console.WriteLine("  Area: " + area.Description);
-                    }
+                        var alert = await GetAlerts(item.Id);
+                        alerts.AddRange(alert);
 
+                    }
+                }
+
+
+
+                if (!alerts.Any())
+                    Console.WriteLine("No alerts");
+                else if (alerts.Count == 1)
+                    Console.WriteLine("1 alert");
+                else
+                    Console.WriteLine("{0} alerts", alerts.Count);
+
+                foreach (var alert in alerts.Where(a => a.Info.Any(i => i.Severity <= Severity.Severe)))
+                {
+                    Console.WriteLine("------------------------------");
+                    Console.WriteLine("Sender: " + alert.Sender);
+                    Console.WriteLine("Note: " + alert.Note);
+
+                    foreach (var info in alert.Info)
+                    {
+                        Console.WriteLine("  *******");
+                        Console.WriteLine("  " + info.Headline);
+                        Console.WriteLine("  Effective: " + info.Effective);
+                        Console.WriteLine("  Expires: " + info.Expires);
+                        Console.WriteLine("  Severity: " + info.Severity);
+
+                        foreach (var area in info.Areas)
+                        {
+                            Console.WriteLine("  Area: " + area.Description);
+                        }
+
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.WriteLine("End of process.");
             Console.ReadLine();
         }
 
-        public static IEnumerable<Alert> GetAlerts(string url)
+        public static async Task<IEnumerable<Alert>> GetAlerts(string url)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.ContentType = "text/xml";
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            IEnumerable<Alert> alertList = null;
+            try
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                var stream = await response.Content.ReadAsStreamAsync();
+
+                using (var reader = XmlReader.Create(stream))
                 {
-                    string message = String.Format("GET failed. Received HTTP {0}", response.StatusCode);
-                    throw new ApplicationException(message);
+                    XDocument doc = XDocument.Load(reader);
+                    alertList = XmlParser.Parse(doc);
                 }
-                else
-                {
-                    using (Stream responseStream = response.GetResponseStream())
-                    {
-                        XDocument doc = XDocument.Load(responseStream);
-                        var alertList = XmlParser.Parse(doc);
-                        return alertList;
-                    }
-                }
+
+
+                return alertList;
+
             }
+            catch (Exception ex)
+            {
+                string message = String.Format("GET failed. Received HTTP {0}", ex);
+                throw new ApplicationException(message);
+            }
+
         }
     }
 }

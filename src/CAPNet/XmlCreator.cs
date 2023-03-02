@@ -160,11 +160,11 @@ namespace CAPNet
         private static IEnumerable<XElement> Create(IEnumerable<GeoCode> geoCodes)
         {
             var geoCodeElements =
-                from geoCode in geoCodes
+                from geocode in geoCodes
                 select new XElement(
                     Cap12Namespace + "geocode",
-                    new XElement(Cap12Namespace + "valueName", geoCode.ValueName),
-                    new XElement(Cap12Namespace + "value", geoCode.Value));
+                    new XElement(Cap12Namespace + "valueName", geocode.ValueName),
+                    new XElement(Cap12Namespace + "value", geocode.Value));
 
             return geoCodeElements;
         }

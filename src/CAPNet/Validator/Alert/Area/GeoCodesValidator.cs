@@ -24,8 +24,8 @@ namespace CAPNet
         {
             get
             {
-                return from geoCode in Entity.GeoCodes
-                       from error in GetErrors(geoCode)
+                return from geocode in Entity.GeoCodes
+                       from error in GetErrors(geocode)
                        select error;
             }
         }
@@ -44,11 +44,11 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="geoCode"></param>
+        /// <param name="geocode"></param>
         /// <returns></returns>
-        private static IEnumerable<Error> GetErrors(GeoCode geoCode)
+        private static IEnumerable<Error> GetErrors(GeoCode geocode)
         {
-            return geoCode.GetErrorsFromAllEntityValidators();
+            return geocode.GetErrorsFromAllEntityValidators();
         }
     }
 }

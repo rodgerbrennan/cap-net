@@ -1,7 +1,9 @@
 ﻿using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace EDXLNet.Models
 {
+    [XmlRoot("contentXML")]
     public class ContentXml
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace EDXLNet.Models
         /// 3. Enclosed XML content may be encrypted and/or signed within this element.
         /// 4. This element MUST be present if parent element, ContentXML, is present.
         /// </summary>
+        [XmlElement("embeddedXMLContent")]
         public XElement EmbeddedXml { get; set; }
     }
 }

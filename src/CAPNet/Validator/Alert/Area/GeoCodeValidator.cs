@@ -11,7 +11,7 @@ namespace CAPNet
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="geoCode"></param>
-        public GeoCodeValidator(GeoCode geoCode) : base(geoCode) { }
+        /// <param name="geocode"></param>
+        public GeoCodeValidator(GeoCode geocode) : base(geocode) { }
     }
 }

@@ -5,7 +5,7 @@ namespace CAPNet.Models
     /// <summary>
     /// Codification of a geographical area (e.g. zip code)
     /// </summary>
-    [XmlRoot("geoCode")]
+    [XmlRoot("geocode")]
     public class GeoCode : NamedValue
     {
         /// <summary>

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace EDXLNet.Models
 {
+    [XmlRoot("edxlDistribution")]
     public class EdxlDistribution
     {
         /// <summary>
@@ -11,6 +13,7 @@ namespace EDXLNet.Models
         /// 2. The identifier MUST be a properly formed -escaped if necessary- XML string.
         /// 3. The string length of the identifier MUST be less than 1024.
         /// </summary>
+        [XmlElement("distributionId")]
         public string DistributionId { get; set; }
 
         /// <summary>
@@ -23,6 +26,7 @@ namespace EDXLNet.Models
         ///    Name System, and uniqueness of the actor name enforced by the domain owner.
         /// 4. The identifier MUST be a properly formed -escaped if necessary- XML string.
         /// </summary>
+        [XmlElement("senderId")]
         public string SenderId { get; set; }
 
         /// <summary>
@@ -32,6 +36,7 @@ namespace EDXLNet.Models
         ///    Must be in the restricted W3C format for the XML [dateTime] data type,
         ///    see ct:EDXLDateTimeType.
         /// </summary>
+        [XmlElement("dateTimeSent")]
         public DateTimeOffset DateTimeSent { get; set; }
 
         /// <summary>
@@ -41,6 +46,7 @@ namespace EDXLNet.Models
         ///    Must be in the restricted W3C format for the XML [dateTime] data type,
         ///    see ct:EDXLDateTimeType.
         /// </summary>
+        [XmlElement("dateTimeExpires")]
         public DateTimeOffset DateTimeExpires { get; set; }
 
         /// <summary>
@@ -56,6 +62,7 @@ namespace EDXLNet.Models
         ///    d. Test - Discardable messages for technical testing only.
         /// 2. The status MUST be a properly formed -escaped if necessary- XML string.
         /// </summary>
+        [XmlElement("distributionStatus")]
         public DistributionStatus DistributionStatus { get; set; }
 
         /// <summary>
@@ -92,6 +99,7 @@ namespace EDXLNet.Models
         ///       detections.
         /// 4. The status MUST be a properly formed -escaped if necessary- XML string.
         /// </summary>
+        [XmlElement("distributionKind")]
         public DistributionKind DistributionKind { get; set; }
 
         /// <summary>
@@ -102,6 +110,7 @@ namespace EDXLNet.Models
         ///    one ore more &lt;Link> elements.
         /// 2. This element can be the source or destination for a link. See Section 1.3.5.
         /// </summary>
+        [XmlElement("content")]
         public Content Content { get; set; }
     }
 }
